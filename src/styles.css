@@ -188,3 +188,8 @@ textarea.form-control {
 .slick-prev:before, .slick-next:before{
   color: #6d724d !important;
 }
+@media screen and (max-width: 600px) {
+  .nav-link img{
+    transform: translateX(-55px);
+  }
+}
