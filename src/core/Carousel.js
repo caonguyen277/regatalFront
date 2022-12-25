@@ -18,8 +18,8 @@ const ControlledCarousel = () => {
           alt="First slide"
         />
         <Carousel.Caption style={style}>
-          <h5>SKINSHOT Bioactive Collagen Shot</h5>
-          <p>Nước uống Collagen đẹp da trị nám</p>
+          {/* <h5>SKINSHOT Bioactive Collagen Shot</h5> */}
+          {/* <p>Nước uống Collagen đẹp da trị nám</p> */}
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item className="text-xs-center text-lg-center">
@@ -30,8 +30,8 @@ const ControlledCarousel = () => {
           alt="Second slide"
         />
         <Carousel.Caption style={style}>
-          <h5>La Mer</h5>
-          <p>Thương hiệu đồ mỹ phẩm hàng đầu</p>
+          {/* <h5>La Mer</h5> */}
+          {/* <p>Thương hiệu đồ mỹ phẩm hàng đầu</p> */}
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -42,11 +42,11 @@ const ControlledCarousel = () => {
           alt="Third slide"
         />
         <Carousel.Caption style={style} >
-          <h5>VALMONT Magic Advent Calendar Limited Edition</h5>
+          {/* <h5>VALMONT Magic Advent Calendar Limited Edition</h5>
           <p>
             
 Trải nghiệm bộ sản phẩm chăm sóc da phiên bản giới hạn Magic Advent Calendar đến từ Valmont
-          </p>
+          </p> */}
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
