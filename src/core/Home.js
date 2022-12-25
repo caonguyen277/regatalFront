@@ -63,6 +63,7 @@ const Home = () => {
   };
   return (
     <Layout>
+      <h1 style={{"textAlign": "center","fontSize" : "2rem !important", "color": "#fbb200"}}>Website đang trong quá trình hoàn thiện vui lòng click vào nút gửi tin nhắn bên dưới để mua hàng</h1>
       <ControlledCarousel /> <br />
       <Search />
       <h2 className="mb-4">Lasted Products</h2>

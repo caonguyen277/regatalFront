@@ -1,7 +1,7 @@
 // import { API } from "../config";
 
 export const read = (userId, token) => {
-  return fetch(`https://web-production-9f18.up.railway.app/api/user/${userId}`, {
+  return fetch(`https://regatal.onrender.com/api/user/${userId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -16,7 +16,7 @@ export const read = (userId, token) => {
 };
 
 export const update = (userId, token, user) => {
-  return fetch(`https://web-production-9f18.up.railway.app/api/user/${userId}`, {
+  return fetch(`https://regatal.onrender.com/api/user/${userId}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -43,7 +43,7 @@ export const updateUser = (user, next) => {
 };
 
 export const getPurchaseHistory = (userId, token,objPagi) => {
-  return fetch(`https://web-production-9f18.up.railway.app/api/orders/by/user/${userId}?${objPagi}`, {
+  return fetch(`https://regatal.onrender.com/api/orders/by/user/${userId}?${objPagi}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
