@@ -115,13 +115,13 @@ const Shop = () => {
                   handleFilters={(filters) => handleFilters(filters, "branch")}
                 />
               </ul>
-              <h4>Filter by price range</h4>
+              {/* <h4>Filter by price range</h4>
               <div>
                 <RadioBox
                   prices={prices}
                   handleFilters={(filters) => handleFilters(filters, "price")}
                 />
-              </div>
+              </div> */}
             </Container>
           </Card>
         </Col>
@@ -130,7 +130,7 @@ const Shop = () => {
           <Search />
           <h2 className="mb-3">Products</h2>
           <Row xs={1} md={2} lg={3}>
-            {filteredResults.map((product, i) => (
+            {filteredResults.length !== 0 && filteredResults.map((product, i) => (
               <Col key={i} className="mb-3">
                 <CardProduct product={product} />
               </Col>

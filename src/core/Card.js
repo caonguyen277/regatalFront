@@ -98,7 +98,7 @@ const CardProduct = ({
           borderRadius: "10px",
         }}
       >
-        <ShowImage item={product} url="product" />
+          <ShowImage item={product} url="product" path = {product.photo.data[0]}/>
       </Card.Header>
       <Card.Body>
         {shouldRedirect(redirect)}

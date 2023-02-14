@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import logo from "../img/logo.png"
+import { Container, Nav, Navbar } from "react-bootstrap";
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
     return { color: "#ff9900" };
@@ -14,26 +15,17 @@ const isActive = (history, path) => {
   }
 };
 const Menu = ({ history }) => (
-  <nav class="navbar navbar-expand-lg navbar-light ">
+  <Navbar bg="light" expand="lg">
+      <Container>
     <Link className="nav-link" style={isActive(history, "")} to="/">
       <img style={{width: "260px"}}
         src={logo}
         alt="logo"
       />
     </Link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="me-auto">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <Link className="nav-link" style={isActive(history, "/")} to="/">
@@ -133,8 +125,10 @@ const Menu = ({ history }) => (
           </Fragment>
         )}
       </ul>
-    </div>
-  </nav>
+      </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
 );
 
 export default withRouter(Menu);

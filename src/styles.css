@@ -192,4 +192,18 @@ textarea.form-control {
   .nav-link img{
     transform: translateX(-55px);
   }
+  .setPadding-sm{
+    padding-bottom: 50px;
+  }
+  .form-inline{
+    padding-left: 0px !important;
+    display: block !important;
+  }
+}
+.slick-dots{
+  position: relative !important;
+  bottom: 0 !important;
+}
+.slick-dots li{
+  width: 40px !important;
 }

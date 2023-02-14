@@ -17,7 +17,7 @@ const AddProduct = () => {
     branches: [],
     branch: "",
     countInStock: "",
-    photo: "",
+    photo: [],
     loading: false,
     error: "",
     createdProduct: "",
@@ -63,8 +63,18 @@ const AddProduct = () => {
   }, []);
 
   const handleChange = (name) => (event) => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    const value = name === "photo" ? 
+    event.target.files : event.target.value;
+    if(name === "photo"){
+    for(let i = 0; i < value.length; i++ ){
+    console.log(value);
+    formData.append("photo",value[i],  value[i].name)
+    }
+   }
+    else{
+    console.log(value);
     formData.set(name, value);
+    }
     setValues({ ...values, [name]: value });
   };
 
@@ -96,6 +106,7 @@ const AddProduct = () => {
       <div className="form-group">
         <label className="btn btn-secondary">
           <input
+            multiple
             onChange={handleChange("photo")}
             type="file"
             name="photo"

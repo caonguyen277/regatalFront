@@ -40,22 +40,27 @@ import {
 import Pagination from "react-bootstrap-4-pagination";
 import { isAuthenticated } from "../auth";
 import queryString from "query-string";
+import CenterMode from "./CenterMode";
 const Product = (props) => {
   const [productId, setProductId] = useState("");
   const [favourite, setFavourite] = useState(false);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState({
+    photo: {
+      data: [],
+    },
+  });
   const [des, setDes] = useState([]);
   const [userGuide, setUserGuide] = useState([]);
+  const [desProduct, setDesProduct] = useState([]);
   const [relatedCategoryProduct, setRelatedCategoryProduct] = useState([]);
   const [relatedBranchProduct, setRelatedBranchProduct] = useState([]);
   const [redirect, setRedirect] = useState(false);
   //Check order
-  const [checkOrder,setCheckOrder] = useState(false);
+  const [checkOrder, setCheckOrder] = useState(false);
   const funcCheckOrder = async (productId) => {
-    const data = await apiCheckOrder(productId,_id,token);
+    const data = await apiCheckOrder(productId, _id, token);
     setCheckOrder(data);
-    console.log(checkOrder);
-  }
+  };
   // Comment
   const [listComment, setListComment] = useState([]);
   const [comment, setComment] = useState({
@@ -159,7 +164,6 @@ const Product = (props) => {
     setListComment(data.data);
     if (data.totalRow === 0) setTotalRow(1);
     else setTotalRow(data.totalRow);
-    console.log(listComment);
   };
   const handleDeleteComment = async (comment) => {
     console.log(comment);
@@ -175,12 +179,15 @@ const Product = (props) => {
     if (categoryProduct.error) return console.log(categoryProduct.error);
     const des = categoryProduct.descriptionProduct.split("-");
     const gui = categoryProduct.userGuide.split("-");
+    const desProduct = categoryProduct.description.split("-");
     setProduct(categoryProduct);
     setDes(des);
+    setDesProduct(desProduct);
     setUserGuide(gui);
     const category = await listCategoryRelated(categoryProduct._id);
     if (category.error) return console.log(category.error);
     setRelatedCategoryProduct(category);
+    console.log(product);
   };
 
   const loadSingleBranchProduct = async (productId) => {
@@ -242,84 +249,99 @@ const Product = (props) => {
     <Layout>
       <Card style={{ marginBottom: "2rem", border: "none" }}>
         <Container
-          className="row"
+          // className="row"
           style={{ paddingTop: 30, paddingBottom: 30, position: "relative" }}
         >
-          <Row className="col-4">
-            <ShowImage item={product} url="product" />
-          </Row>
-          <Row className="col-5 pr-20" style={{ paddingRight: 40 }}>
-            <Card.Text>
-              <h4 className="font-weight-bold">{product.name}</h4>
-              <h5>Category: {product.category && product.category.name}</h5>
-              <p>{product.description}</p>
-              <span className="font-italic font-weight-light">
-                Added on {moment(product.createdAt).fromNow()}
-              </span>
-            </Card.Text>
-          </Row>
-          <Row className="col-3" style={{ paddingRight: 40, marginBottom: 40 }}>
-            <Card>
-              <Card.Title
-                className="text-center mt-3 font-weight-bold"
-                style={{ paddingBottom: 15 }}
-              >
-                {product.name}
-              </Card.Title>
+          <Row>
+            <Col xs = {12} md= {6}className="setPadding-sm px-5">
+              <CenterMode product={product}></CenterMode>
+              {/* <ShowImage item={product} url="product" path = {product.photo.data[0]}/> */}
+            </Col>
+            <Col xs = {12} md= {4} className="pr-20" style={{ paddingRight: 40 }}>
               <Card.Text>
-                <Row className="text-xs-center text-lg-center">
-                  <Col xs={6}>Price:</Col>
-                  <Col xs={6}>
-                    <h5>${product.price} </h5>
-                  </Col>
-                </Row>
-                <hr />
-                <Row className="text-xs-center text-lg-center">
-                  <Col xs={6}>Status: </Col>
-                  <Col xs={6}>
-                    <h5>{showStock(product.countInStock)}</h5>
-                  </Col>
-                </Row>
-                {shouldRedirect(redirect)}
-                <h1 className="text-center">
-                  {showAddToCart(product.countInStock)}
-                </h1>
+                <h4 className="font-weight-bold">{product.name}</h4>
+                <h5>Category: {product.category && product.category.name}</h5>
+                {desProduct.map((el, index) => (
+                  <p>{el}</p>
+                ))}
+                <span className="font-italic font-weight-light">
+                  Added on {moment(product.createdAt).fromNow()}
+                </span>
               </Card.Text>
-            </Card>
-          </Row>
-          {_id ? (
-            favourite ? (
-              <div
-                style={{ position: "absolute", width: "100px", right: "-23px" }}
-              >
-                <FontAwesomeIcon
-                  className="css-Icon"
-                  onClick={() => handleSubFavourite()}
-                  style={{ cursor: "pointer", color: "red" }}
-                  icon={faHeart}
-                />
-              </div>
+            </Col>
+            <Col xs = {12} md = {2} className="" style={{ marginBottom: 40 }}>
+              <Card>
+                <Card.Title
+                  className="text-center mt-3 font-weight-bold"
+                  style={{ paddingBottom: 15 }}
+                >
+                  {product.name}
+                </Card.Title>
+                <Card.Text>
+                  <Row className="text-xs-center text-lg-center">
+                    <Col xs={6}>Price:</Col>
+                    <Col xs={6}>
+                      <h5>${product.price} </h5>
+                    </Col>
+                  </Row>
+                  <hr />
+                  <Row className="text-xs-center text-lg-center">
+                    <Col xs={6}>Status: </Col>
+                    <Col xs={6}>
+                      <h5>{showStock(product.countInStock)}</h5>
+                    </Col>
+                  </Row>
+                  {shouldRedirect(redirect)}
+                  <h1 className="text-center">
+                    {showAddToCart(product.countInStock)}
+                  </h1>
+                </Card.Text>
+              </Card>
+            </Col>
+            {_id ? (
+              favourite ? (
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "100px",
+                    right: "-60px",
+                    top: "5px"
+                  }}
+                >
+                  <FontAwesomeIcon
+                    className="css-Icon"
+                    onClick={() => handleSubFavourite()}
+                    style={{ cursor: "pointer", color: "red" }}
+                    icon={faHeart}
+                  />
+                </div>
+              ) : (
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "100px",
+                    right: "-60px",
+                    top: "5px"
+                  }}
+                >
+                  <FontAwesomeIcon
+                    className="css-Icon"
+                    onClick={() => handleAddFavourite()}
+                    style={{ cursor: "pointer", color: "black" }}
+                    icon={faHeart}
+                  />
+                </div>
+              )
             ) : (
-              <div
-                style={{ position: "absolute", width: "100px", right: "-23px" }}
-              >
-                <FontAwesomeIcon
-                  className="css-Icon"
-                  onClick={() => handleAddFavourite()}
-                  style={{ cursor: "pointer", color: "black" }}
-                  icon={faHeart}
-                />
-              </div>
-            )
-          ) : (
-            ""
-          )}
+              ""
+            )}
+          </Row>
         </Container>
       </Card>
       <Card style={{ border: "none", minHeight: "500px" }}>
         <Container id="#">
           <h4 style={{ marginTop: 20, marginBottom: 20 }}>
-          Write Review On Lilem
+            Write Review On Lilem
           </h4>
           <>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -499,7 +521,7 @@ const Product = (props) => {
                           </Accordion>
                         </Row>
                       ) : (
-                      <Row>
+                        <Row>
                           <Accordion>
                             <Accordion.Item eventKey="0">
                               <Accordion.Header>Viết đánh giá</Accordion.Header>
@@ -639,26 +661,26 @@ const Product = (props) => {
       <Card style={{ border: "none" }}>
         <Container>
           <h4 style={{ marginTop: 20, marginBottom: 20 }}>Related products</h4>
-          <div className="row">
+          <Row>
             {relatedCategoryProduct.map((p, i) => (
-              <div key={i} className="col-3 mb-3">
+              <Col sm={6} key={i} className="mb-3">
                 <CardProduct product={p} />
-              </div>
+              </Col>
             ))}
-          </div>
+          </Row>
         </Container>
       </Card>
       <br />
       <Card style={{ border: "none" }}>
         <Container>
           <h4 style={{ marginTop: 20, marginBottom: 20 }}>Related branches</h4>
-          <div className="row">
+          <Row>
             {relatedBranchProduct.map((c, a) => (
-              <div key={a} className="col-3 mb-3">
+              <Col sm={6} key={a} className="mb-3">
                 <CardProduct product={c} />
-              </div>
+              </Col>
             ))}
-          </div>
+          </Row>
         </Container>
       </Card>
     </Layout>

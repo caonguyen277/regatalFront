@@ -60,14 +60,41 @@ const Home = () => {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true
+        }
+      }
+    ]
   };
   return (
     <Layout>
-      <h1 style={{"textAlign": "center","fontSize" : "2rem !important", "color": "#fbb200"}}>Website đang trong quá trình hoàn thiện vui lòng click vào nút gửi tin nhắn bên dưới để mua hàng</h1>
+      {/* <h1 style={{"textAlign": "center","fontSize" : "2rem !important", "color": "#fbb200"}}>Website đang trong quá trình hoàn thiện vui lòng click vào nút gửi tin nhắn bên dưới để mua hàng</h1> */}
       <ControlledCarousel /> <br />
       {/* <Search /> */}
       <h2 className="mb-4">Lasted Products</h2>
-      <Row xs={2} md={2} lg={3} xl={5}>
+      <Row xs={1} md={2} lg={3} xl={5}>
         <Slider {...settings}>
           {productsByArrival.map((product, i) => (
             <Col key={i} className="mb-3">
@@ -77,7 +104,7 @@ const Home = () => {
         </Slider>
       </Row>
       <h2 className="mb-4">Best Sellers</h2>
-      <Row xs={2} md={2} lg={3} xl={5}>
+      <Row xs={1} md={2} lg={3} xl={5}>
         <Slider {...settings}>
           {productsBySell.map((product, i) => (
             <Col key={i} className="mb-3">
@@ -87,7 +114,7 @@ const Home = () => {
         </Slider>
       </Row>
       <h2 className="mb-4">Good Reviews</h2>
-      <Row xs={2} md={2} lg={3} xl={5}>
+      <Row xs={1} md={2} lg={3} xl={5}>
         {comments.map((comment, i) => (
           <Col key={i} className="mb-3">
             <Card 
@@ -113,7 +140,7 @@ const Home = () => {
                     }}
                     to={`/product/${comment.product._id}`}
                   >
-                    <ShowImage item={comment.product} url="product" />
+                    <ShowImage item={comment.product} url="product" path = {comment.product.photo.data[0]}/>
                   </Link>
                 
               </Card.Header>

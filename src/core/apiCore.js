@@ -3,7 +3,7 @@ import queryString from "query-string";
 
 export const getProducts = async (sortBy) => {
   const response = await fetch(
-    `https://regatal.onrender.com/api/products?sortBy=${sortBy}&order=desc&limit=8`,
+    `http://regatal.onrender.com/api/products?sortBy=${sortBy}&order=desc&limit=8`,
     {
       method: "GET",
     }
@@ -35,7 +35,7 @@ export const getFilteredProducts = async (skip, limit, filters = {}) => {
     skip,
     filters,
   };
-  const response = await fetch(`https://regatal.onrender.com/api/by/search`, {
+  const response = await fetch(`http://regatal.onrender.com/api/by/search`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -58,7 +58,7 @@ export const list = async (params) => {
 
 export const read = async (productId) => {
   const response = await fetch(
-    `https://regatal.onrender.com/api/adminProduct/${productId}`,
+    `http://regatal.onrender.com/api/adminProduct/${productId}`,
     {
       method: "GET",
     }
@@ -69,7 +69,7 @@ export const read = async (productId) => {
 
 export const listCategoryRelated = async (productId) => {
   const response = await fetch(
-    `https://regatal.onrender.com/api/relatedCategory/${productId}`,
+    `http://regatal.onrender.com/api/relatedCategory/${productId}`,
     {
       method: "GET",
     }
@@ -80,7 +80,7 @@ export const listCategoryRelated = async (productId) => {
 
 export const listBranchRelated = async (productId) => {
   const response = await fetch(
-    `https://regatal.onrender.com/api/relatedBranch/${productId}`,
+    `http://regatal.onrender.com/api/relatedBranch/${productId}`,
     {
       method: "GET",
     }
@@ -177,7 +177,7 @@ export const apiDeleteComment = async (comment,token) => {
 
 export const apiListFavourite = async(userId) => {
   const response = await fetch(
-    `https://regatal.onrender.com/api/favourites/${userId}`,
+    `http://regatal.onrender.com/api/favourites/${userId}`,
     {
       method: "GET",
     }
