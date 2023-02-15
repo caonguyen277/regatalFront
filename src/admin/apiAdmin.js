@@ -36,7 +36,7 @@ export const createBranch = async (userId, token, branch) => {
 
 export const createProduct = async (userId, token, product) => {
   const response = await fetch(
-    `http://regatal.onrender.com/api/createProduct/${userId}`,
+    `https://regatal.onrender.com/api/createProduct/${userId}`,
     {
       method: "POST",
       headers: {

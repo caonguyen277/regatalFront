@@ -16,7 +16,7 @@ const isActive = (history, path) => {
 };
 const Menu = ({ history }) => (
   <Navbar bg="light" expand="lg">
-      <Container>
+      <Container fluid>
     <Link className="nav-link" style={isActive(history, "")} to="/">
       <img style={{width: "260px"}}
         src={logo}
