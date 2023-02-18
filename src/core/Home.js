@@ -83,7 +83,9 @@ const Home = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          dots: true
+          infinite: false,
+          dots: true,
+          arrows:false,
         }
       }
     ]
